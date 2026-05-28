@@ -3,15 +3,15 @@
 
 #define MAXSPEED 3
 
-class arrowClass
+class shipClass
 {
 public:
-	arrowClass();
-	~arrowClass();
-	void create_arrow_bitmap(ALLEGRO_DISPLAY* display);
-	void erase_arrow();
-	void move_arrow(int width, int height);
-	void drawArrow();
+	shipClass();
+	~shipClass();
+	void create_ship_bitmap(ALLEGRO_DISPLAY* display);
+	void erase_ship();
+	void move_ship(int width, int height);
+	void drawShip();
 	int getDirection();
 	int getSpeed();
 	int getX();
@@ -26,6 +26,6 @@ private:
 	int dir, speed;
 	int color;
 	int score;
-	ALLEGRO_BITMAP* arrow_bmp[4];
+	ALLEGRO_BITMAP* ship_bmp[4];
 
 };

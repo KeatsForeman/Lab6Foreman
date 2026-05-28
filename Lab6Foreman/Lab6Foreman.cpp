@@ -1,12 +1,12 @@
 // Lab6Foreman.cpp : This file contains the 'main' function. Program execution begins and ends there.
 #include <allegro5\allegro.h>
 #include <allegro5\allegro_primitives.h>
-#include "arrow.h";
+#include "ship.h";
 #include "bullet.h"
 
 int main(void)
 {
-	arrowClass arrow;
+	shipClass arrow;
 	bullet mybullet[10];
 	int score = 0;
 	bool redraw = true;
@@ -34,7 +34,7 @@ int main(void)
 	//addon init
 	al_install_keyboard();
 	al_init_primitives_addon();
-	arrow.create_arrow_bitmap(display);
+	arrow.create_ship_bitmap(display);
 
 
 	al_set_target_bitmap(al_get_backbuffer(display));
@@ -43,7 +43,7 @@ int main(void)
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));
 	al_clear_to_color(al_map_rgb(0, 0, 0));
-	arrow.drawArrow();
+	arrow.drawShip();
 	al_flip_display();
 	al_start_timer(timer);
 	while (!done)
@@ -91,14 +91,14 @@ int main(void)
 			redraw = false;
 
 			if (arrow.getSpeed() != 0) {
-				arrow.erase_arrow();
-				arrow.move_arrow(width, height);
+				arrow.erase_ship();
+				arrow.move_ship(width, height);
 			}
-			arrow.drawArrow();
+			arrow.drawShip();
 			for (int i = 0;i < 10;i++)
 			{
 				mybullet[i].erase_bullet();
-				score += mybullet[i].move_bullet(arrow.getX(), arrow.getY(), 32, 32, height);
+				score += mybullet[i].move_bullet(arrow.getX(), arrow.getY(), 64, 64, height);
 			}
 		}
 		al_flip_display();

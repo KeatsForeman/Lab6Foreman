@@ -21,7 +21,7 @@
     <ClCompile Include="bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="arrow.cpp">
+    <ClCompile Include="ship.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,7 +32,7 @@
     <ClInclude Include="bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="arrow.h">
+    <ClInclude Include="ship.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
