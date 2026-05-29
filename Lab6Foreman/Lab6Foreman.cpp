@@ -3,6 +3,8 @@
 #include <allegro5\allegro_primitives.h>
 #include "ship.h";
 #include "bullet.h"
+#include <stdio.h>
+#include <string>
 
 int main(void)
 {
@@ -29,6 +31,11 @@ int main(void)
 		return -1;
 
 	display = al_create_display(width, height);			//create our display object
+
+	for (int i = 0; i < 10; i++) {
+		mybullet[i].create_bullet_bitmap(display);
+	}
+
 
 	if (!display)										//test display object
 		return -1;
@@ -64,6 +71,7 @@ int main(void)
 			{
 				if (!mybullet[i].getStatus()) {
 					mybullet[i].fire();
+					mybullet[i].draw();
 				}
 			}
 		}
@@ -109,6 +117,8 @@ int main(void)
 		}
 		al_flip_display();
 	}
+	std::string scores = std::to_string(score);
+	printf(scores.c_str(), "\n");
 	al_destroy_event_queue(event_queue);
 	al_destroy_timer(timer);
 	al_destroy_display(display);						//destroy our display object
