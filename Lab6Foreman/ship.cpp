@@ -145,9 +145,9 @@ void shipClass::move_ship(int width, int height)
 		y = height - 64;
 		speed = 0;
 	}
-	if (y < 0)
+	if (y < 40)
 	{
-		y = 0;
+		y = 40;
 		speed = 0;
 	}
 }

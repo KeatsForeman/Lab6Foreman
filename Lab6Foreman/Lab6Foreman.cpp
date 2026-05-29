@@ -11,10 +11,12 @@ int main(void)
 	int score = 0;
 	bool redraw = true;
 	const int FPS = 60;
+	int frames = 0;
+	
 
 	//variables
 	int width = 640;
-	int height = 480;
+	int height = 520;
 	bool done = false;
 
 	//allegro variable
@@ -53,7 +55,11 @@ int main(void)
 
 		if (ev.type == ALLEGRO_EVENT_TIMER)
 		{
+			frames += 1;
 			redraw = true;
+			if (frames >= 1800) {
+				break;
+			}
 			for (int i = 0;i < 10;i++)
 			{
 				if (!mybullet[i].getStatus()) {
