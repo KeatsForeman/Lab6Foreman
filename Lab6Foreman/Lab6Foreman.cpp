@@ -1,10 +1,13 @@
 // Lab6Foreman.cpp : This file contains the 'main' function. Program execution begins and ends there.
 #include <allegro5\allegro.h>
 #include <allegro5\allegro_primitives.h>
+#include <allegro5\allegro_ttf.h>
+#include <allegro5\allegro_font.h>
 #include "ship.h";
 #include "bullet.h"
 #include <stdio.h>
 #include <string>
+#include <iostream>
 
 int main(void)
 {
@@ -43,6 +46,11 @@ int main(void)
 	//addon init
 	al_install_keyboard();
 	al_init_primitives_addon();
+	al_init_ttf_addon();
+	al_init_font_addon();
+
+	ALLEGRO_FONT* font = al_load_font("Cat.ttf", 30, 0);
+
 	arrow.create_ship_bitmap(display);
 
 
@@ -55,6 +63,7 @@ int main(void)
 	arrow.drawShip();
 	al_flip_display();
 	al_start_timer(timer);
+	int time = 30;
 	while (!done)
 	{
 		ALLEGRO_EVENT ev;
@@ -64,6 +73,10 @@ int main(void)
 		{
 			frames += 1;
 			redraw = true;
+			//every 60 frames time drops one second
+			if (frames % 60 == 0) {
+				time -= 1;
+			}
 			if (frames >= 1800) {
 				break;
 			}
@@ -115,10 +128,19 @@ int main(void)
 				score += mybullet[i].move_bullet(arrow.getX(), arrow.getY(), 64, 64, height);
 			}
 		}
+		//clear top of screen before writing
+		al_draw_filled_rectangle(0, 0, width, 40, al_map_rgb(0, 0, 0));
+		std::string scores = std::to_string(score);
+		al_draw_text(font, al_map_rgb(255, 255, 255), width / 2, 5, 0, scores.c_str());
+		std::string times = std::to_string(time);
+		al_draw_text(font, al_map_rgb(255, 255, 255), (width / 2) - 100, 5, 0, times.c_str());
 		al_flip_display();
 	}
+	al_clear_to_color(al_map_rgb(0, 0, 0));
 	std::string scores = std::to_string(score);
-	printf(scores.c_str(), "\n");
+	al_draw_text(font, al_map_rgb(255, 255, 255), width / 2, 5, 0, scores.c_str());
+	
+	al_rest(5.0);
 	al_destroy_event_queue(event_queue);
 	al_destroy_timer(timer);
 	al_destroy_display(display);						//destroy our display object
